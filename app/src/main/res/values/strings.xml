@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Dice Roller</string>
     <string name="roll">Roll</string>
+    <string-array name="dice_array">
+        <item>d4</item>
+        <item>d6</item>
+        <item>d8</item>
+        <item>d10</item>
+        <item>d12</item>
+        <item>d20</item>
+    </string-array>
 </resources>
