@@ -2,10 +2,8 @@ package com.example.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.ImageView
 
 /*
  * This is the activity that allows the user to roll a dice and
@@ -23,10 +21,10 @@ class MainActivity : AppCompatActivity() {
         val rollButton: Button = findViewById(R.id.button)
         // "listens" for the user to click on the button
         rollButton.setOnClickListener { rollDice() }
-        }
+
+        // do a random dice roll when the app starts
+        rollDice()
     }
-
-
 
 
     /*
@@ -34,18 +32,28 @@ class MainActivity : AppCompatActivity() {
      */
     private fun rollDice() {
         // based on selection in spinner, set the number of sides the dice should have
-        
+
 
         // create a dice with 6 sides and roll it
         // saving the result in a variable
         val dice = Dice(6)
         val diceRoll = dice.roll()
 
-        // find the text view to display the result in
-        val resultTextView: TextView = findViewById(R.id.textView2)
-        // convert dice roll to string
-        // update the text of resultTextView
-        resultTextView.text = diceRoll.toString()
+        // create a reference to the dice image view and update the drawable on the screen
+        val diceImage: ImageView = findViewById(R.id.diceImages)
+        // basically the alt value of the dice images for accessibility
+        diceImage.contentDescription = diceRoll.toString()
+        // save the result from the when statement as a variable
+        val drawableResource = when (diceRoll) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+        // update the display based on the when variable
+        diceImage.setImageResource(drawableResource)
     }
 }
 
